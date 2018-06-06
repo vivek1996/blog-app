@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+$violet-light: #7a08fa;
+$pink: #ff2e63;
+$blue-light: #08d9d6;
+$grey: #eaeaea;
+$dark: #252a34;
+$btn-gra: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);
+
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px|Source+Sans+Pro:400,700');
+body {
+  background: $grey;
+  font-family: 'Slabo 27px', serif;
+}
+p {
+  font-family: 'Source Sans Pro', sans-serif;
+}
