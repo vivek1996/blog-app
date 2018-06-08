@@ -10,8 +10,10 @@ export const DATA: Data[] = [
     category: 'comedy',
     isPublished: true,
     views: 959,
-    bodyHtml: 'Test data e ',
-    description: 'This is desc',
+    bodyHtml:
+      'Test data stibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam blogId ornare imperdiet, sapien urna p ',
+    description:
+      'This is descstibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam blogId ornare imperdie',
     title: 'Blog 1',
   },
   {
