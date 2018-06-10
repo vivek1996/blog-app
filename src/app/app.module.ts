@@ -9,7 +9,8 @@ import { HomeComponent } from './home/home.component';
 import { BlogViewComponent } from './blog-view/blog-view.component';
 import { BlogCreateComponent } from './blog-create/blog-create.component';
 import { BlogEditComponent } from './blog-edit/blog-edit.component';
-
+import { BlogHttpService } from './blog-http.service';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,13 +19,10 @@ import { BlogEditComponent } from './blog-edit/blog-edit.component';
     HomeComponent,
     BlogViewComponent,
     BlogCreateComponent,
-    BlogEditComponent
+    BlogEditComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  providers: [BlogHttpService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
