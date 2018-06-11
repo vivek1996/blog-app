@@ -1,6 +1,7 @@
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { DATA } from './../mockdata';
+// import { DATA } from './../mockdata';
+import { BlogHttpService } from './../blog-http.service';
 @Component({
   selector: 'app-blog-view',
   templateUrl: './blog-view.component.html',
@@ -8,20 +9,22 @@ import { DATA } from './../mockdata';
 })
 export class BlogViewComponent implements OnInit {
   public currentBlog;
-  data = DATA;
-  constructor(private route: ActivatedRoute) {}
+  // data = DATA;
+  constructor(
+    private route: ActivatedRoute,
+    private router: RouterModule,
+    private blogHttpService: BlogHttpService
+  ) {}
 
   ngOnInit() {
-    const val = this.route.snapshot.paramMap.get('blogId');
-    // console.log(val);
-    this.findCurrentData(val);
-  }
-  findCurrentData(id): any {
-    for (const blog of this.data) {
-      // tslint:disable-next-line:triple-equals
-      if (blog.blogId == id) {
-        this.currentBlog = blog;
+    const currentBlogId = this.route.snapshot.paramMap.get('blogId');
+    this.blogHttpService.getSingleBlogInformation(currentBlogId).subscribe(
+      data => {
+        this.currentBlog = data.data;
+      },
+      error => {
+        console.log(error.errorMessage);
       }
-    }
+    );
   }
 }

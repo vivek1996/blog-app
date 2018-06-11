@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row" *ngIf="currentBlog">
     <div class="col-md-12">
-      <h2 class=" font-weight-bold">{{currentBlog.title}}</h2>
+      <h2 class=" font-weight-bold">{{currentBlog.title | uppercase}}</h2>
 
-      <p class=" text-muted">Posted by {{currentBlog.author | titlecase}} ON {{currentBlog.created | date}}</p>
+      <p class=" text-muted">Posted by {{currentBlog.author | titlecase}} On {{currentBlog.created | date}}</p>
       <p *ngIf="currentBlog.tags.length>0" class=" font-weight-bold text-violet">Tags :
         <span *ngFor="let tag of currentBlog.tags;let first=first;let last=last">{{tag}}{{last ? '' : ', '}}</span>
       </p>

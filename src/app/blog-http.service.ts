@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { observable } from 'rxjs/observable';
+import { Observable } from 'rxjs';
 // import 'rxjs/add/operator/catch';
 // import 'rxjs/add/operator/do';
 @Injectable({
@@ -10,17 +10,22 @@ export class BlogHttpService {
   public currentBlog;
   public allBlogs;
   public baseUrl = 'https://blogapp.edwisor.com/api/v1/blogs';
+  // tslint:disable-next-line:max-line-length
+  public authToken = `authToken=ZDNjYmRhZjZmNWQwMTc2NmQzY2JhNmQwOTA1Y2RhYTY5NzAzNjYxOWQwZjUzMmNiZDg4YTIzMzM0NjY4N2FmZjM5ZjgzNjQwMmNkMDYzMDM2ZGE5MWRkYzk1ZDU2ZmZiNWRkNzdiM2RlMTIzNzI0YjhjYzk0N2VlOTQ0YTFjNWQ5ZA==`;
   constructor(private _http: HttpClient) {
-    console.log('service con called');
+    // console.log('service con called');
   }
   public getAllBlogs(): any {
     // tslint:disable-next-line:max-line-length
-    const response = this._http.get(
-      this.baseUrl +
-        '/all?authToken=ZDNjYmRhZjZmNWQwMTc2NmQzY2JhNmQwOTA1Y2RhYTY5NzAzNjYxOWQwZjUzMmNiZDg4YTIzMzM0NjY4N2FmZjM5ZjgzNjQwMmNkMDYzMDM2ZGE5MWRkYzk1ZDU2ZmZiNWRkNzdiM2RlMTIzNzI0YjhjYzk0N2VlOTQ0YTFjNWQ5ZA=='
-    );
+    const response = this._http.get(`${this.baseUrl}/all?${this.authToken}`);
+    this.allBlogs = response;
     console.log(response);
     return response;
   }
-  public getSingleBlogInformation(currentBlog): any {}
+  public getSingleBlogInformation(currentBlogId): any {
+    const myResponse = this._http.get(
+      `${this.baseUrl}/view/${currentBlogId}?${this.authToken} `
+    );
+    return myResponse;
+  }
 }
