@@ -11,6 +11,7 @@ import { BlogCreateComponent } from './blog-create/blog-create.component';
 import { BlogEditComponent } from './blog-edit/blog-edit.component';
 import { BlogHttpService } from './blog-http.service';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     BlogCreateComponent,
     BlogEditComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [BlogHttpService],
   bootstrap: [AppComponent],
 })

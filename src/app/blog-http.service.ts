@@ -28,4 +28,26 @@ export class BlogHttpService {
     );
     return myResponse;
   }
+  public deleteBlog(blogId): any {
+    const data = {};
+    const myResponse = this._http.post(
+      `${this.baseUrl}/${blogId}/delete?${this.authToken}`,
+      data
+    );
+    return myResponse;
+  }
+  public createBlog(blogData): any {
+    const myResponse = this._http.post(
+      `${this.baseUrl}/create?${this.authToken}`,
+      blogData
+    );
+    return myResponse;
+  }
+  public editBlog(blogId, blogData): any {
+    const myResponse = this._http.put(
+      `${this.baseUrl}/${blogId}/edit?${this.authToken}`,
+      blogData
+    );
+    return myResponse;
+  }
 }
