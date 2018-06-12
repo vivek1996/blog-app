@@ -11,31 +11,31 @@
             required>
 
         </div>
-        <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
-          Blog Title is required
-        </div>
+        <div [hidden]="title.valid || title.pristine" class="alert alert-danger" role="alert">Name is required </div>
 
         <div class="form-group">
           <label>Description</label>
-          <input type="text" name="blogDescription" [(ngModel)]="blogDescription" #description="ngModel" class="form-control"
-            placeholder="Enter Description" required>
+          <input type="text" name="blogDescription" [(ngModel)]="blogDescription" #description="ngModel" class="form-control" placeholder="Enter Description"
+            required>
         </div>
         <div class="form-group">
-          <label>Enter the blog body</label>
-          <textarea name="blogBodyHtml" [(ngModel)]="blogBody" #bodyHtml="ngModel" class="form-control" rows="3" required></textarea>
+          <label for="FormControlTextarea1">Enter the blog body</label>
+          <textarea class="form-control" id="FormControlTextarea1" name="blogBodyHtml" [(ngModel)]="blogBody" #bodyHtml="ngModel" rows="3"
+            required></textarea>
         </div>
         <div class="form-group">
           <label>Category</label>
-          <select [(ngModel)]="currentBlog.category" #category="ngModel" name="blogCategory" class="form-control" id="category" required>
+          <select [(ngModel)]="blogCategory" #category="ngModel" name="blogCategory" class="form-control" id="category" required>
             <option *ngFor="let category of possibleCategories" [value]="category">{{category}}</option>
           </select>
         </div>
 
 
-        <button type="submit" class="btn btn-default" [disabled]="!createBlogForm.form.valid">Edit the blog</button>
+        <button type="submit" class="btn btn-default" [disabled]="!createBlogForm.form.valid">Post the blog</button>
       </form>
     </div>
 
   </div>
+
 
 </div>
