@@ -1,7 +1,8 @@
-import { RouterModule, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 // import { DATA } from './../mockdata';
 import { BlogHttpService } from './../blog-http.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-blog-view',
   templateUrl: './blog-view.component.html',
@@ -9,21 +10,36 @@ import { BlogHttpService } from './../blog-http.service';
 })
 export class BlogViewComponent implements OnInit {
   public currentBlog;
+  public currentBlogId = this.route.snapshot.paramMap.get('blogId');
   // data = DATA;
   constructor(
     private route: ActivatedRoute,
-    private router: RouterModule,
-    private blogHttpService: BlogHttpService
+    private router: Router,
+    private blogHttpService: BlogHttpService,
+    private toastr: ToastrService
   ) {}
-
   ngOnInit() {
-    const currentBlogId = this.route.snapshot.paramMap.get('blogId');
-    this.blogHttpService.getSingleBlogInformation(currentBlogId).subscribe(
+    this.blogHttpService.getSingleBlogInformation(this.currentBlogId).subscribe(
       data => {
         this.currentBlog = data.data;
       },
       error => {
         console.log(error.errorMessage);
+      }
+    );
+  }
+  public deleteThisBlog(): any {
+    this.blogHttpService.deleteBlog(this.currentBlogId).subscribe(
+      data => {
+        console.log(data);
+        this.toastr.success('Blog Deleted Successfully');
+        setTimeout(() => {
+          this.router.navigate(['/home']);
+        }, 1500);
+      },
+      error => {
+        console.log(error);
+        this.toastr.warning(error.errorMessage);
       }
     );
   }
