@@ -3,10 +3,12 @@ import { Component, OnInit } from '@angular/core';
 // import { DATA } from './../mockdata';
 import { BlogHttpService } from './../blog-http.service';
 import { ToastrService } from 'ngx-toastr';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-blog-view',
   templateUrl: './blog-view.component.html',
   styleUrls: ['./blog-view.component.scss'],
+  providers: [Location]
 })
 export class BlogViewComponent implements OnInit {
   public currentBlog;
@@ -16,7 +18,8 @@ export class BlogViewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private blogHttpService: BlogHttpService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private location: Location
   ) {}
   ngOnInit() {
     this.blogHttpService.getSingleBlogInformation(this.currentBlogId).subscribe(
@@ -42,5 +45,8 @@ export class BlogViewComponent implements OnInit {
         this.toastr.warning(error.errorMessage);
       }
     );
+  }
+  public goBackToPreviousPage() {
+    this.location.back();
   }
 }
